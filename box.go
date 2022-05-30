@@ -51,7 +51,13 @@ func (b *box) GetByIndex(i int) (Shape, error) {
 // ExtractByIndex allows getting shape by index and removes this shape from the list.
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ExtractByIndex(i int) (Shape, error) {
-	panic("implement me")
+
+	if i > b.shapesCapacity {
+		err := errors.New("key not exist")
+		fmt.Println("Not value: $v", err)
+		return nil, err
+	}
+	return b.shapes[i], nil
 
 }
 
@@ -64,13 +70,21 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 
 // SumPerimeter provides sum perimeter of all shapes in the list.
 func (b *box) SumPerimeter() float64 {
-	panic("implement me")
+	var sumper float64
+	for _, per := range b.shapes {
+		sumper += per.CalcPerimeter()
+	}
+	return sumper
 
 }
 
 // SumArea provides sum area of all shapes in the list.
 func (b *box) SumArea() float64 {
-	panic("implement me")
+	var sumper float64
+	for _, arr := range b.shapes {
+		sumper += arr.CalcArea()
+	}
+	return sumper
 
 }
 
