@@ -9,10 +9,10 @@ type Circle struct {
 
 //mycode
 
-func (ac Circle) CalcArea() float64 {
+func (ac *Circle) CalcArea() float64 {
 	return math.Pi * ac.Radius * ac.Radius
 }
 
-func (pc Circle) CalcPerimeter() float64 {
+func (pc *Circle) CalcPerimeter() float64 {
 	return math.Pi * (pc.Radius + pc.Radius)
 }

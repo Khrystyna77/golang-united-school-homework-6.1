@@ -9,11 +9,11 @@ type Triangle struct {
 
 //mycode
 
-func (tr Triangle) CalcArea() float64 {
+func (tr *Triangle) CalcArea() float64 {
 	s := (tr.Side + tr.Side + tr.Side) / 2
 	return math.Sqrt(s * (s - tr.Side) * (s - tr.Side) * (s - tr.Side))
 }
 
-func (trp Triangle) CalcPerimeter() float64 {
+func (trp *Triangle) CalcPerimeter() float64 {
 	return trp.Side + trp.Side + trp.Side
 }
