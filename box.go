@@ -41,9 +41,10 @@ func (b *box) AddShape(shape Shape) error {
 func (b *box) GetByIndex(i int) (Shape, error) {
 	if i > len(b.shapes) {
 		err := errors.New("Something went wrong")
+		//fmt.Println("Not good capacity:", err)
 		return nil, err
 	}
-	return b.shapes[i], err
+	return b.shapes[i], nil
 
 }
 
