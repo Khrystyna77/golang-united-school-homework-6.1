@@ -22,16 +22,12 @@ func NewBox(shapesCapacity int) *box {
 // returns the error in case it goes out of the shapesCapacity range.
 func (b *box) AddShape(shape Shape) error {
 	//mycode
-	circle := &Circle{}
-	triangle := &Triangle{}
-	rectangle := &Rectangle{}
 
-	b.shapes = []Shape{circle, triangle, rectangle}
-
-	if b.shapesCapacity != len(b.shapes) {
+	if len(b.shapes) >= b.shapesCapacity {
 		err := errors.New("Something went wrong")
 		fmt.Println("Not good capacity:", err)
 	}
+	b.shapes = append(b.shapes, shape)
 	return nil
 
 }
@@ -39,7 +35,7 @@ func (b *box) AddShape(shape Shape) error {
 // GetByIndex allows getting shape by index
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) GetByIndex(i int) (Shape, error) {
-	if i > len(b.shapes) {
+	if i >= b.shapesCapacity {
 		err := errors.New("Something went wrong")
 		//fmt.Println("Not good capacity:", err)
 		return nil, err
@@ -52,7 +48,7 @@ func (b *box) GetByIndex(i int) (Shape, error) {
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ExtractByIndex(i int) (Shape, error) {
 
-	if i > b.shapesCapacity {
+	if i >= b.shapesCapacity {
 		err := errors.New("key not exist")
 		fmt.Println("Not value: $v", err)
 		return nil, err
@@ -64,33 +60,37 @@ func (b *box) ExtractByIndex(i int) (Shape, error) {
 // ReplaceByIndex allows replacing shape by index and returns removed shape.
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
-	panic("implement me")
+
+	if i >= b.shapesCapacity {
+		err := errors.New("key not in box")
+		fmt.Println("Not value: $v", err)
+		return nil, err
+	}
+	return b.shapes[i], nil
 
 }
 
 // SumPerimeter provides sum perimeter of all shapes in the list.
 func (b *box) SumPerimeter() float64 {
-	var sumper float64
-	for _, per := range b.shapes {
-		sumper += per.CalcPerimeter()
+	var sum float64
+	for _, shape := range b.shapes {
+		sum += shape.CalcPerimeter()
+		fmt.Println(sum)
 	}
-	return sumper
-
+	return sum
 }
 
 // SumArea provides sum area of all shapes in the list.
 func (b *box) SumArea() float64 {
-	var sumper float64
-	for _, arr := range b.shapes {
-		sumper += arr.CalcArea()
+	var sum float64
+	for _, shape := range b.shapes {
+		sum += shape.CalcArea()
 	}
-	return sumper
-
+	return sum
 }
 
 // RemoveAllCircles removes all circles in the list
 // whether circles are not exist in the list, then returns an error
 func (b *box) RemoveAllCircles() error {
-	panic("implement me")
-
+	return nil
 }
