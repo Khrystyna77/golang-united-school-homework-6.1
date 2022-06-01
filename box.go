@@ -95,22 +95,21 @@ func (b *box) SumArea() float64 {
 func (b *box) RemoveAllCircles() error {
 	//var list2 Circle
 	var item *Circle
-    for i, k := range shapes {
-		var s []Shape
+	for i, k := range b.shapes {
 		if k == item {
-			s = shapes
-			s = append(s[:i], s[i+1:]...)
-			fmt.Println(s)
-			return s
-		} 
-		if k != item
+
+			b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
+			//fmt.Println(b.shapes)
+			return nil
+		}
+		if k != item {
 			err := errors.New("don't know")
 			fmt.Println("how remove", err)
 			return err
-
 		}
-     
 
+	}
+	return nil
 	//for k := range b.shapes {
 	//b.shapes = Remove(b.shapes, list2)
 
