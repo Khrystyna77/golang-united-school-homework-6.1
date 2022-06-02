@@ -54,6 +54,7 @@ func (b *box) ExtractByIndex(i int) (Shape, error) {
 		fmt.Println("Not value: $v", err)
 		return nil, err
 	}
+
 	return b.shapes[i], nil
 
 }
@@ -93,24 +94,20 @@ func (b *box) SumArea() float64 {
 // RemoveAllCircles removes all circles in the list
 // whether circles are not exist in the list, then returns an error
 func (b *box) RemoveAllCircles() error {
-	//var list2 Circle
-	var item *Circle
-	for i, k := range b.shapes {
-		if k == item {
-
+	size := len(b.shapes)
+	for i := 0; i < len(b.shapes); i++ {
+		if _, ok := b.shapes[i].(*Circle); ok {
 			b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
-			//fmt.Println(b.shapes)
-			return nil
+			i--
 		}
-		if k != item {
-			err := errors.New("don't know")
-			fmt.Println("how remove", err)
-			return err
-		}
-
+	}
+	if size == len(b.shapes) {
+		err := errors.New("There are no circle here")
+		fmt.Println("Not valid type: $v", err)
+		return err
 	}
 	return nil
-	//for k := range b.shapes {
-	//b.shapes = Remove(b.shapes, list2)
-
 }
+
+//for k := range b.shapes {
+//b.shapes = Remove(b.shapes, list2)
